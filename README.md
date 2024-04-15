@@ -10,12 +10,7 @@ This is a sample app that combines Elasticsearch, Langchain and a Azure to creat
 
 ## Download the Project
 
-Download the project from Github and extract the `chatbot-rag-app` folder.
-
-```bash
-curl https://codeload.github.com/elastic/elasticsearch-labs/tar.gz/main | \
-tar -xz --strip=2 elasticsearch-labs-main/example-apps/chatbot-rag-app
-```
+```git clone https://github.com/2gavy/search-cna.git```
 
 ## Installing and connecting to Elasticsearch
 
