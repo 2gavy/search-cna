@@ -97,9 +97,9 @@ def ask_question(question, session_id):
         ]
     )
     answer = answer.choices[0].message.content;
-    
-    yield f"data: {answer}\n\n"
+    answer = answer.replace("\\", "\\\\").replace("\n", "</p><p>")
 
+    yield f"data: {answer}\n\n"
     yield f"data: {DONE_TAG}\n\n"
     current_app.logger.debug("Answer: %s", answer)
 

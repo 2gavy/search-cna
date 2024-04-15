@@ -1,3 +1,28 @@
+PUT search-cna-nested/_mapping
+{
+  "properties": {
+    "passages": {
+      "type": "nested",
+      "properties": {
+        "dense": {
+          "type": "dense_vector",
+          "index_options": {
+            "type": "int8_hnsw"
+          }
+        },
+        "vector.predicted_value": {
+          "type": "sparse_vector"
+        },
+        "text": {
+          "type": "text"
+        },
+        "model_id": {
+          "type": "keyword"
+        }
+      }
+    }
+  }
+}
 
 PUT _ingest/pipeline/search-cna-pipeline
 {
@@ -46,31 +71,7 @@ PUT _ingest/pipeline/search-cna-pipeline
   ]
 }
 
-PUT search-cna-nested/_mapping
-{
-  "properties": {
-    "passages": {
-      "type": "nested",
-      "properties": {
-        "dense": {
-          "type": "dense_vector",
-          "index_options": {
-            "type": "int8_hnsw"
-          }
-        },
-        "vector.predicted_value": {
-          "type": "sparse_vector"
-        },
-        "text": {
-          "type": "text"
-        },
-        "model_id": {
-          "type": "keyword"
-        }
-      }
-    }
-  }
-}
+
 
 
 GET search-cna-nested/_search
