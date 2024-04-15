@@ -125,6 +125,11 @@ With the environment variables set, you can run the following commands to start 
 - Python 3.8+
 - Node 14+
 
+### Environment Files
+- .env (Make a copy of env.example and rename it to .env, fill in your variables / credentials)
+- .flaskenv
+
+
 #### Install the dependencies
 
 For Python we recommend using a virtual environment.
@@ -142,7 +147,7 @@ source .venv/bin/activate
 pip install -r requirements.txt
 
 # Install Node dependencies
-cd frontend && yarn && cd ..
+cd frontend && yarn install && cd ..
 ```
 
 #### Run API and frontend
@@ -152,7 +157,7 @@ cd frontend && yarn && cd ..
 python3 -m flask run
 
 # In a separate terminal launch frontend app
-cd frontend && yarn install & yarn start
+cd frontend && yarn start
 ```
 
 You can now access the frontend at http://localhost:3000. Changes are automatically reloaded.
