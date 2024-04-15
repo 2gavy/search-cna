@@ -1,0 +1,5 @@
+frontend/.venv/lib
+.env
+frontend/node_modules/*
+.venv/*
+api/__pycache__/*
