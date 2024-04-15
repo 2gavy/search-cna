@@ -57,7 +57,7 @@ def ask_question(question, session_id):
   }
     
     current_app.logger.debug("Index: %s", INDEX)
-    docs = es.search(index="search-cna-nested", source=source_fields, query=text_expand_query)
+    docs = es.search(index=INDEX, source=source_fields, query=text_expand_query)
 
     for doc in docs["hits"]["hits"]:
         metadata_object = {
