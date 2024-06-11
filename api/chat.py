@@ -6,6 +6,9 @@ from flask import render_template, stream_with_context, current_app
 import json
 import os
 from openai import AzureOpenAI
+from dotenv import load_dotenv
+
+load_dotenv()
 
 ES_USER= os.getenv("ES_USER")
 ES_PASS= os.getenv("ES_PASS")
@@ -37,22 +40,35 @@ def ask_question(question, session_id):
     )
 
     text_expand_query = {
-    "nested": {
-      "path": "passages",
-      "query": {
-        "text_expansion": {
-          "passages.vector.predicted_value": {
-            "model_id": ".elser_model_2_linux-x86_64",
-            "model_text": question
+    "bool": {
+      "must": [
+        {
+          "range": {
+            "last_crawled_at": {
+              "lte": "now-14d/d"
+            }
+          }
+        },
+        {
+          "nested": {
+            "path": "passages",
+            "query": {
+              "text_expansion": {
+                "passages.vector.predicted_value": {
+                  "model_id": ".elser_model_2_linux-x86_64",
+                  "model_text": "What are the latest trends in Singapore?"
+                }
+              }
+            },
+            "inner_hits": {
+              "_source": "false",
+              "fields": [
+                "passages.text"
+              ]
+            }
           }
         }
-      },
-      "inner_hits": {
-        "_source": "false",
-        "fields": [
-          "passages.text"
-        ]
-      }
+      ]
     }
   }
     

@@ -1,0 +1,5 @@
+python3 -m flask run
+
+cd frontend && yarn start
+
+<iframe src="http://localhost:8081/" style="width: 35rem; height: 30rem;"></iframe>

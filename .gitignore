@@ -3,3 +3,4 @@ frontend/.venv/lib
 frontend/node_modules/*
 .venv/*
 api/__pycache__/*
+.DS_Store

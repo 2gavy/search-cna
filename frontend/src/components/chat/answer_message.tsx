@@ -1,16 +1,17 @@
 import { Sources } from './sources'
 import { ChatMessageType } from '../../types'
+import DossierBox from '../../components/dossierbox';
 
 interface AnswerMessageProps {
   text: ChatMessageType['content']
   sources: ChatMessageType['sources']
   onSourceClick: (source: string) => void
 }
-
 export const AnswerMessage: React.FC<AnswerMessageProps> = ({
   text,
   sources,
   onSourceClick,
+
 }) => {
   return (
     <div className="mb-4">
@@ -26,6 +27,9 @@ export const AnswerMessage: React.FC<AnswerMessageProps> = ({
           </div>
         </div>
       </header>
+      {text && (
+        <div className="graph"></div>
+      )}
 
       {text && (
         <div
@@ -33,6 +37,7 @@ export const AnswerMessage: React.FC<AnswerMessageProps> = ({
           dangerouslySetInnerHTML={{ __html: text }}
         ></div>
       )}
+
       {sources && (
         <Sources
           showDisclaimer

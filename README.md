@@ -1,4 +1,4 @@
-# Elastic Chatbot RAG App
+# Elastic Chatbot RAG App (CNA)
 
 **This is an simplfied and adapted version of Elastic Chatbot RAG App (https://github.com/elastic/elasticsearch-labs/tree/main/example-apps/chatbot-rag-app)**
 

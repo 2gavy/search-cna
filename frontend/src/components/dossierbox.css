@@ -1,0 +1,65 @@
+.dossier-box {
+    display: flex;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    background-color: #f9f9f9;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    transition: transform 0.2s;
+    display: none;
+    margin-top:200px;
+  }
+  
+  .dossier-box:hover {
+    transform: scale(1.05);
+  }
+  
+  .dossier-image {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+  }
+  
+  .dossier-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .dossier-name {
+    font-size: 1.5em;
+    margin: 0;
+    color: #333;
+  }
+  
+  .dossier-info {
+    margin: 5px 0;
+    color: #555;
+  }
+  
+  .dossier-more-info {
+    margin-top: 10px;
+    font-style: italic;
+    color: #777;
+  }
+  
+  /* Media query for small screens */
+@media (max-width: 768px) {
+  .app-container {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .middle-element {
+    margin-right: 0;
+    margin-bottom: 20px; /* Add margin to separate the elements vertically */
+  }
+
+  .dossier-box {
+    max-width: 100%; /* Ensure the box takes full width on small screens */
+  }
+}
