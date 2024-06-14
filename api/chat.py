@@ -39,41 +39,59 @@ def ask_question(question, session_id):
         INDEX_CHAT_HISTORY, session_id
     )
 
-    text_expand_query = {
-    "bool": {
-      "must": [
+    current_app.logger.debug("Index: %s", INDEX)
+    docs = es.search(index=INDEX, source=source_fields, retriever = {"rrf": {
+      "retrievers": [
         {
-          "range": {
-            "last_crawled_at": {
-              "lte": "now-14d/d"
+          "standard": {
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "multi_match": {
+                      "query": question,
+                      "fields": ["title", "meta_description"],
+                      }
+                  },
+                    {
+                      "range": {
+                        "last_crawled_at": {
+                          "lte": "now-7d/d"
+                        }
+                      }
+                  }]
+              }
             }
           }
         },
         {
-          "nested": {
-            "path": "passages",
+          "standard": {
             "query": {
-              "text_expansion": {
-                "passages.vector.predicted_value": {
-                  "model_id": ".elser_model_2_linux-x86_64",
-                  "model_text": "What are the latest trends in Singapore?"
+              "nested": {
+                "path": "passages",
+                "query": {
+                  "text_expansion": {
+                    "passages.vector.predicted_value": {
+                      "model_id": ".elser_model_2_linux-x86_64",
+                      "model_text": question
+                    }
+                  }
+                },
+                "inner_hits": {
+                  "_source": "false",
+                  "fields": [
+                    "passages.text"
+                  ]
                 }
               }
-            },
-            "inner_hits": {
-              "_source": "false",
-              "fields": [
-                "passages.text"
-              ]
             }
           }
         }
-      ]
+      ],
+      "window_size": 10,
+      "rank_constant": 1
     }
-  }
-    
-    current_app.logger.debug("Index: %s", INDEX)
-    docs = es.search(index=INDEX, source=source_fields, query=text_expand_query)
+  })
 
     for doc in docs["hits"]["hits"]:
         metadata_object = {
